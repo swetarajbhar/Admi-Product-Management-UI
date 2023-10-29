@@ -1,0 +1,10 @@
+
+const DATE_FORMAT = {
+    STANDARD_DATE_FORMAT: 'DD/MM/YYYY',
+    SHORT_DATE_FORMAT: 'dd/MM/yyyy',
+    LONG_DATE_FORMAT: 'Do MMM YYYY, h:mm A',
+    SEARCH_DATE_FORMAT: 'MM/DD/yyyy',
+    YYYY_MM_DD_FORMAT: 'YYYY/MM/DD',
+};
+
+export default DATE_FORMAT;

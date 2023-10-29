@@ -1,0 +1,8 @@
+.container {
+    input[type=file] {
+        display   : none;
+        visibility: hidden;
+        width     : 0;
+        height    : 0;
+    }
+}

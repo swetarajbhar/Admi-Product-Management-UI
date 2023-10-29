@@ -1,0 +1,64 @@
+.container {
+  .Card {
+    box-shadow      : 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition      : 0.3s;
+    border-radius   : 10px;
+    background-color: white;
+    padding         : 0px 15px;
+
+    &.Card:hover {
+      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+
+.card_button {
+  display        : flex;
+  gap            : 20px;
+  justify-content: flex-end;
+  padding        : 15px 20px 15px 0px;
+
+  .yearDropdown {
+    width: 100px;
+  }
+
+  .card_radio {
+    display    : flex;
+    gap        : 5px;
+    align-items: center;
+    font-size  : 12px;
+    line-height: 20px;
+
+    input {
+      width : 1.5em;
+      height: 1.5em;
+    }
+
+    input[type="radio"]::after {
+      background-color: red !important;
+    }
+  }
+
+  .card_radio_text {
+    margin: 0px !important;
+  }
+}
+
+.Heading {
+  padding-top   : 1%;
+  padding-bottom: 1%;
+}
+
+input[type='radio']:after {
+  background-color: indigo !important;
+}
+
+input[type='radio']:checked:after {
+  background-color: indigo !important;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 22px 40px 0px;
+  }
+}

@@ -1,0 +1,54 @@
+@mixin inviUL {
+    padding-inline : 0;
+    margin-block   : 0;
+    list-style-type: none;
+}
+
+@mixin inviLink {
+    text-decoration: none;
+}
+
+@mixin pointer {
+    cursor: pointer;
+}
+
+@mixin inviButton {
+    border          : none;
+    box-shadow      : none;
+    outline         : none;
+    background-color: transparent;
+    @include pointer;
+}
+
+@mixin button {
+    line-height   : 21px;
+    font-size     : 1.3em;
+    border-radius : 12px;
+    min-height    : 40px;
+    cursor        : pointer;
+    letter-spacing: 0px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+@mixin button-primary {
+    @include button;
+    background-color: var(--light-theme-primary-color);
+    box-shadow      : 0px 3px 6px #FE4B025C;
+    color           : #FFFFFF;
+}
+
+@mixin button-secondary {
+    @include button;
+    background-color: #FFFFFF;
+    border          : 1px solid var(--light-theme-primary-color);
+    color           : var(--light-theme-primary-color);
+}
+
+
+@mixin themeInputStyle {
+    height       : 32px;
+    border       : 1px solid #C4C4C4;
+    border-radius: 6px;
+}

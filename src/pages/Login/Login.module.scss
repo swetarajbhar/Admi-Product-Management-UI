@@ -1,0 +1,48 @@
+.container {
+  display: grid;
+  height: 100%;
+
+  .loginContainer {
+    display: grid;
+    grid-template-rows: max-content min-content;
+    align-content: center;
+    justify-content: flex-end;
+    padding-right: 70px;
+    background-image: url("../../assets/SVG/inventoryBg1.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    gap: 30px;
+
+    section {
+      display: grid;
+      justify-content: center;
+      grid-template-rows: 0.2fr 0.8fr;
+      gap: 40px;
+      grid-template-columns: 23vw;
+      background-color: white;
+      border-radius: 12px;
+      padding: 20px;
+      height: max-content;
+
+      @media screen and (max-width: 1280px) {
+        grid-template-columns: 25vw;
+      }
+
+      svg,
+      img {
+        justify-self: center;
+      }
+
+      .body {
+        display: grid;
+        gap: 30px;
+      }
+    }
+
+    .inventoryLogo {
+      height: 200px;
+      width: 250px;
+    }
+  }
+}

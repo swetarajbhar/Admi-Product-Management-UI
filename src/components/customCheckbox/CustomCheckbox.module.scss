@@ -1,0 +1,11 @@
+
+.checkboxWrapper {
+    display: grid;
+    grid-template-columns: max-content auto;
+    grid-column-gap: 0.5em;
+    color: #696969;
+}
+
+.hideCheckbox {
+    opacity: 0;
+}

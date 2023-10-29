@@ -1,0 +1,268 @@
+.container {
+    background   : #FFFFFF 0% 0% no-repeat padding-box;
+    padding      : 2em 5.4em;
+    border-radius: 1em;
+
+    .headingStyle {
+        padding-bottom: 1.5em;
+        font-size     : 18px;
+
+        &:after {
+            content: " *";
+            color  : red;
+        }
+    }
+
+    .radioButtonWrapper {
+        display    : flex;
+        align-items: center;
+
+        .radioItem {
+            margin-right: 1em;
+            display     : flex;
+            align-items : center;
+        }
+
+        .radioLabel {
+            padding-left: 0.5em;
+        }
+
+        // input[type="radio"] {
+        //     -webkit-appearance: none;
+        //     -moz-appearance: none;
+        //     appearance: none;
+        //     display: inline-block;
+        //     width: 1.7em;
+        //     height: 1.7em;
+        //     padding: 0.2em;
+        //     background-clip: content-box;
+        //     border: 2px solid var(--light-theme-primary-color);
+        //     border-radius: 50%;
+        // }
+
+        // input[type="radio"]:checked {
+        //     background-color: var(--light-theme-primary-color);
+        // }
+    }
+
+    .computerUploadContainer {
+        display              : grid;
+        grid-template-columns: 1fr 1fr;
+        grid-row             : 1fr 1fr 1fr;
+        grid-row-gap         : 2em;
+        grid-column-gap      : 1em;
+        margin-top           : 2em;
+    }
+
+    .s3UploadContainer {
+        display              : grid;
+        grid-template-columns: 1fr 1fr;
+        grid-row             : 1fr 1fr;
+        grid-row-gap         : 2em;
+        grid-column-gap      : 1em;
+        margin-top           : 2em;
+
+        .selectFromS3Wrapper {
+            display        : flex;
+            justify-content: space-between;
+            gap            : 1em;
+
+            .s3SelectStyle {
+                width: 100%;
+            }
+        }
+    }
+
+    .lastRecordContainer {
+        display              : grid;
+        grid-template-columns: 1fr 1fr;
+        grid-row             : 1fr 1fr;
+        gap                  : 2em 1em;
+        margin-top           : 2em;
+    }
+
+    .uploadAndContinue {
+        font-size   : 16px;
+        padding     : 0 0.8em;
+        margin-right: 0;
+        margin-left : auto;
+        margin-top  : 2em;
+        display: flex;
+        column-gap: 0.5em;
+        flex-wrap: wrap;
+    }
+
+    .inputStyle {
+        border-color : hsl(0, 0%, 80%);
+        border-radius: 4px;
+        border-style : solid;
+        border-width : 1px;
+        font-size    : 16px;
+
+        ::-webkit-input-placeholder {
+            color: hsl(0, 0%, 50%);
+        }
+
+        :-ms-input-placeholder {
+            color: hsl(0, 0%, 50%);
+        }
+
+        ::placeholder {
+            color: hsl(0, 0%, 50%);
+        }
+    }
+
+    .previewBtnStyle {
+        font-size: 16px;
+        padding  : 0 0.8em;
+        width    : 30%;
+    }
+
+    .uploadWrapper {
+        display        : flex;
+        justify-content: space-between;
+        gap            : 1em;
+    }
+
+    .uploadFileWrapper {
+        border-color : hsl(0, 0%, 80%);
+        border-radius: 4px;
+        border-style : solid;
+        border-width : 1px;
+        width        : 100%;
+        border-right : 0;
+        display      : flex;
+
+        .fileName {
+            padding         : 10px;
+            min-width       : 200px;
+            font-size       : 16px;
+            color           : hsl(0, 0%, 50%);
+            border          : none;
+            border-radius   : 4px;
+            background-color: white;
+            width           : 100%;
+        }
+
+        .upload {
+            display                   : flex;
+            justify-content           : center;
+            align-items               : center;
+            width                     : 48px;
+            background                : var(--light-theme-primary-color);
+            border-bottom-right-radius: 4px;
+            border-top-right-radius   : 4px;
+
+            input[type="file"] {
+                display: none;
+            }
+        }
+    }
+
+    .progressModal {
+        position               : fixed;
+        width                  : 100%;
+        height                 : 100%;
+        z-index                : 5;
+        top                    : 0;
+        left                   : 0;
+        right                  : 0;
+        bottom                 : 0;
+        margin                 : auto;
+        background-color       : rgba(0, 0, 0, 0.4);
+        -webkit-backdrop-filter: blur(1px);
+        -moz-backdrop-filter   : blur(1px);
+        -o-backdrop-filter     : blur(1px);
+        -ms-backdrop-filter    : blur(1px);
+        backdrop-filter        : blur(1px);
+
+        .progressBar {
+            background-color: #FE4B02;
+            height          : 0.4em;
+            border-radius   : 7px;
+            position        : absolute;
+            bottom          : 0;
+            left            : 0;
+        }
+
+        &Body {
+            position        : absolute;
+            left            : 21vw;
+            right           : 4vw;
+            bottom          : 10%;
+            background-color: white;
+            border-radius   : 7px;
+            min-height      : 76px;
+        }
+
+        &Content {
+            background : #FE4B021C 0% 0% no-repeat padding-box;
+            min-height : 76px;
+            display    : flex;
+            align-items: center;
+            gap        : 0.5em;
+            padding    : 0.1em 2em;
+            flex-wrap  : wrap;
+
+            .fileName {
+                background-color: white;
+                padding         : 0.5em;
+                height          : 40px;
+                border          : 1px solid #E3E3E3;
+                display         : flex;
+                align-items     : center;
+                flex            : 1;
+                font-size       : 15px;
+            }
+
+            .fileDuration {
+                flex: 1;
+            }
+
+            .uploadDuration {
+                flex           : 1;
+                display        : flex;
+                justify-content: end;
+            }
+        }
+    }
+}
+
+
+
+.videoPreviewContainer {
+    background-color: black;
+    height          : 90vh;
+    width           : 90vw;
+    border-radius   : 10px;
+    box-shadow      : 0px 3px 6px #00000047;
+    border          : 15px solid #696969;
+    opacity         : 1;
+    position        : relative;
+
+    .closePreviewModal {
+        content            : ' ';
+        position           : absolute;
+        top                : 2em;
+        right              : 2.5em;
+        background-image   : url(../../assets/SVG/closeCircleIcon.svg);
+        background-position: center;
+        background-repeat  : no-repeat;
+        background-size    : cover;
+        opacity            : 0.7;
+        z-index            : 200;
+        width              : 2em;
+        height             : 2em;
+    }
+}
+
+
+.errorMessage {
+    color: red;
+}
+
+.optionItemWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

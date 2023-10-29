@@ -1,0 +1,250 @@
+$table-border                 : 1px solid #DCDCDC;
+$table-corner-radius          : 1em;
+$table-header-color           : rgba(255, 255, 255, 0.8);
+$table-header-background-color: rgba(254, 75, 2, 1) 0% 0% no-repeat padding-box;
+$table-body-color             : #3E3E3E;
+$scrollbar-bg                 : #CCCCCC;
+
+.tableWrapper {
+    position             : relative;
+    overflow             : auto;
+    white-space          : nowrap;
+    /* for firefox */
+    overscroll-behavior-x: contain;
+    border-radius        : $table-corner-radius;
+    margin-top           : 1em;
+    min-height           : 60%;
+
+    &::-webkit-scrollbar {
+        height: 0.5em;
+    }
+
+    &::-webkit-scrollbar-track {
+        background   : $scrollbar-bg;
+        border-radius: 1em;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: var(--light-theme-primary-color);
+        border-radius   : 1em;
+    }
+
+    // for firefox
+    scrollbar-width: thin;
+    scrollbar-color: var(--light-theme-primary-color) $scrollbar-bg;
+
+    .tableStyle {
+        border-collapse : separate;
+        border-spacing  : 0;
+        width           : 100%;
+        color           : $table-body-color;
+        background-color: white;
+
+        .thStyle {
+            position     : relative;
+            padding-right: 1.5em;
+        }
+
+        tr th,
+        tr td {
+            border-right : $table-border;
+            border-bottom: $table-border;
+            padding      : 0.9em;
+            min-width    : 5em;
+        }
+
+        .wrapCol {
+            min-width  : 400px !important;
+            word-wrap  : break-word;
+            white-space: break-spaces;
+        }
+
+        .breakWord {
+            width         : 15%;
+            // min-width  : 150px !important;
+            word-wrap     : break-word;
+            white-space   : break-spaces;
+            word-break    : break-word;
+        }
+
+        tr th:first-child,
+        tr td:first-child {
+            border-left: $table-border;
+        }
+
+        tr th {
+            background    : $table-header-background-color;
+            border-top    : $table-border;
+            text-align    : left;
+            letter-spacing: 0px;
+            color         : $table-header-color;
+        }
+
+        /* top-left border-radius */
+        tr:first-child th:first-child {
+            border-top-left-radius: $table-corner-radius;
+        }
+
+        /* top-right border-radius */
+        tr:first-child th:last-child {
+            border-top-right-radius: $table-corner-radius;
+        }
+
+        /* bottom-left border-radius */
+        tr:last-child td:first-child {
+            border-bottom-left-radius: $table-corner-radius;
+        }
+
+        /* bottom-right border-radius */
+        tr:last-child td:last-child {
+            border-bottom-right-radius: $table-corner-radius;
+        }
+
+        th:first-child,
+        tr:first-child,
+        td:first-child {
+            padding-left: 1.5em;
+        }
+
+        th:last-child,
+        tr:last-child,
+        td:last-child {
+            padding-right: 1.5em;
+        }
+
+        .actionColumn,
+        .actionColumnData {
+            text-align : center;
+            position   : -webkit-sticky;
+            position   : sticky;
+            width      : 7em;
+            min-width  : 7em;
+            max-width  : 8em;
+            right      : 0;
+            border-left: $table-border;
+        }
+
+        .actionColumnData {
+            background-color: white;
+        }
+
+        .actionIcon {
+            background: none;
+            border    : none;
+            cursor    : pointer;
+        }
+    }
+
+    .downloadColumn {
+        width: 10em;
+        right: 0;
+    }
+
+    .previewColumn {
+        width: 13em;
+        right: 0;
+    }
+
+    .previewColumnData {
+        text-align: center;
+
+        .previewBtnStyle {
+            font-size    : 16px;
+            padding      : 0 2em;
+            // width: 100%;
+            border-radius: 6px;
+        }
+    }
+
+    .radioWrapper {
+        display    : flex;
+        align-items: center;
+    }
+
+    .statusBtn {
+        color     : #FE4B02;
+        background: none;
+        outline   : none;
+        border    : none;
+        cursor    : pointer;
+        font-size : inherit;
+    }
+}
+
+.pagination {
+    display        : flex;
+    justify-content: center;
+    flex-direction : column;
+    align-items    : flex-end;
+    margin-top     : 1em;
+
+    .buttonWrapper {
+        display: flex;
+
+        .previousNextButton {
+            cursor     : pointer;
+            margin     : 0 5px;
+            padding-top: 1em;
+            ;
+        }
+
+        .disableButton {
+            color         : #160E4D;
+            pointer-events: none;
+        }
+
+        .enabledButton {
+            color: var(--light-theme-primary-color);
+        }
+
+        .buttonStyle {
+            color          : #8E8E8E;
+            background     : #F5F5F5 0% 0% no-repeat padding-box;
+            border         : 3px solid #EBEBEB;
+            border-radius  : 8px;
+            opacity        : 1;
+            cursor         : pointer;
+            font-size      : 17px;
+            text-align     : center;
+            height         : 40px;
+            width          : 40px;
+            margin         : 0.5em;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: none;
+                background     : var(--light-theme-primary-color);
+                color          : #FFFFFF;
+                border         : 3px solid var(--light-theme-primary-color);
+            }
+        }
+
+        .active {
+            color        : #FFFFFF;
+            background   : var(--light-theme-primary-color) 0% 0% no-repeat padding-box;
+            border-radius: 8px;
+            opacity      : 1;
+            border       : 3px solid var(--light-theme-primary-color);
+        }
+    }
+}
+
+.inputStyle {
+    border-color : hsl(0, 0%, 80%);
+    border-radius: 4px;
+    border-style : solid;
+    border-width : 1px;
+    font-size    : 16px;
+
+    ::-webkit-input-placeholder {
+        color: hsl(0, 0%, 50%);
+    }
+
+    :-ms-input-placeholder {
+        color: hsl(0, 0%, 50%);
+    }
+
+    ::placeholder {
+        color: hsl(0, 0%, 50%);
+    }
+}

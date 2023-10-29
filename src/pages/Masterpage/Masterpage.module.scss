@@ -1,0 +1,19 @@
+.masterContainer {
+  display              : grid;
+  grid-template-columns: 17vw calc(100% - 17vw);
+  grid-template-rows   : 60px calc(100% - 60px);
+  height               : 100vh;
+  width                : 100vw;
+
+  main {
+    grid-area       : 2/2/2/2;
+    padding         : 1.7em;
+    overflow-y      : auto;
+    background-color: #F4F8F9;
+
+    &.auth {
+      grid-area: 1/1/3/3;
+      padding  : 0;
+    }
+  }
+}

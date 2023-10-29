@@ -1,0 +1,23 @@
+.container {
+    border-radius        : 10px;
+    background-color     : var(--light-theme-primary-color-100);
+    display              : grid;
+    grid-template-columns: 1fr;
+    align-items          : center;
+    justify-items        : center;
+    width                : 90px;
+    flex-shrink          : 0;
+    height               : 55px;
+
+    svg {
+        width : 25px;
+        height: 25px;
+    }
+
+    h5 {
+        text-align    : center;
+        line-height   : 10px;
+        letter-spacing: 0px;
+        font-size     : 9px;
+    }
+}

@@ -1,0 +1,178 @@
+.container {
+    grid-area    : 1/1/1/1;
+    background   : #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow   : 0px 3px 28px #95A2A92B;
+    opacity      : 1;
+    width        : 100vw;
+    height       : 60px;
+    display      : flex;
+    align-items  : center;
+    padding-right: 2em;
+
+    .logo {
+        background     : #FCFBFB 0% 0% no-repeat padding-box;
+        opacity        : 1;
+        height         : 60px;
+        width          : 17vw;
+        display        : flex;
+        align-items    : center;
+        justify-content: center;
+    }
+
+    .rightAlign {
+        display     : flex;
+        margin-left : auto;
+        margin-right: 0;
+    }
+
+    .headerItems {
+        background     : #F0F0F0 0% 0% no-repeat padding-box;
+        border-radius  : 5px;
+        margin-right   : 1em;
+        height         : 40px;
+        display        : flex;
+        align-items    : center;
+        padding        : 0 0.5em;
+        justify-content: end;
+    }
+
+    .notification {
+        position: relative;
+
+        .notificationIcon {
+            fill  : none;
+            cursor: pointer;
+        }
+
+        &:hover .notificationBox {
+            display       : flex;
+            flex-direction: column;
+        }
+
+        .notificationBox {
+            width        : 26.6em;
+            position     : absolute;
+            display      : none;
+            color        : #000000;
+            top          : 2.5em;
+            right        : 0;
+            z-index      : 2;
+            background   : #FFFFFF 0% 0% no-repeat padding-box;
+            box-shadow   : 0px 8px 12px #0000001C;
+            opacity      : 1;
+            border-radius: 1em;
+
+            .notificationItem {
+                display      : flex;
+                align-items  : center;
+                min-height   : 4em;
+                border-bottom: 1px solid #0000001C;
+                padding      : 0.5em 1em;
+
+                &:last-child {
+                    border: none;
+                }
+            }
+
+            .viewAllNotifications {
+                color    : #FE4B02;
+                height   : 2.5em;
+                font-size: 16px;
+            }
+
+            .noNotifications {
+                text-align: center;
+                padding   : 4em 0;
+            }
+
+            .videoIcon {
+                min-width       : 2.5em;
+                min-height      : 2.5em;
+                border-radius   : 1.5em;
+                background-color: #FE8401;
+                padding         : 0.4em;
+                fill            : white;
+                margin          : 0 0.5em;
+            }
+        }
+    }
+
+    .profileContainer {
+        min-width      : 8vw;
+        color          : var(--light-theme-primary-color);
+        display        : flex;
+        justify-content: space-between;
+        font-size      : 13px;
+        position       : relative;
+        padding-right  : 20px;
+    }
+
+
+}
+
+.modalContainer {
+    width           : auto;
+    background-color: white;
+    padding         : 20px;
+    border-radius   : 20px;
+    padding-top     : 15px;
+    padding-bottom  : 35px;
+
+    .content {
+        width        : 350px;
+        margin-top   : 15px;
+        margin-bottom: 20px;
+    }
+
+    .oldPassword {
+        margin-bottom: 30px;
+    }
+
+    .newpassword {
+        margin-bottom: 30px;
+    }
+
+    .confirmpassword {
+        margin-bottom: 15px;
+    }
+
+    small {
+        color: red;
+    }
+}
+
+.modalButtonStyle {
+    width       : 20%;
+    margin-right: 1.3em;
+}
+
+.submitBtnStyle {
+    width: 100%;
+}
+
+.closeBtnStyle {
+    position     : relative;
+    float        : right;
+    font-weight  : bold;
+    border       : 0px !important;
+    font-size    : 30px !important;
+    padding-right: 0px;
+}
+
+.heading {
+    font-size: 20px;
+    color: #fe4b02;
+    text-align: center;
+    padding-top: 30px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+.error{
+   
+        font-size  : 0.8em;
+        display    : inline;
+        height     : min-content;
+        line-height: 5px;
+        color      : red;
+
+}

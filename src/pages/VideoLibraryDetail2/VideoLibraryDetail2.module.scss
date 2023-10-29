@@ -1,0 +1,104 @@
+.container {
+    // height: 50vh;
+    // width : 50vw;
+
+    .radioText {
+        gap   : 5px;
+        margin: 10px 0;
+    }
+
+    .videoSection {
+        display         : grid;
+        justify-items   : center;
+        align-items     : center;
+        border-radius   : 12px;
+        background-color: white;
+        gap             : 10px;
+        padding         : 12px;
+
+        .videoPlayerContainer {
+            // height: auto;
+            height: 20em;
+            width : 460px;
+        }
+
+        .actionButtons {
+            gap: 10px;
+
+            #playButton {
+                display         : flex;
+                padding         : 2px;
+                background-color: var(--light-theme-primary-color);
+                border-radius   : 50%;
+                width           : max-content;
+                height          : 40px;
+                width           : 40px;
+                align-items     : center;
+                justify-content : center;
+            }
+
+            .videoEditActionButtons {
+                svg {
+                    path {
+                        fill: inherit;
+                    }
+                }
+            }
+
+        }
+
+    }
+
+    .thumbnailContainer {
+        width: 84%;
+        display: flex;
+        position: relative;
+
+        .thumbnails {
+            display    : flex;
+            flex: 1;
+            gap        : 1px;
+            margin-left: 35px;
+            overflow-x : scroll;
+            position   : absolute;
+            width      : calc(100% - 70px);
+
+            .loader {
+                width: 100%;
+                height: 40px;
+                display: grid;
+                justify-self: center;
+
+                svg {
+                    width: inherit;
+                    height: inherit;
+                }
+            }
+        }
+
+        .buttonContainer {
+            display: flex;
+            width: 80px;
+            height: min-content;
+            justify-content: space-between;
+            position: absolute;
+            right: 90px;
+            top: -40px;
+        }
+    }
+
+    .navigationActionButton {
+        display         : flex;
+        justify-content : space-between;
+        background-color: white;
+        border-radius   : 10px;
+        padding         : 5px;
+
+        button[type=button] {
+            min-width: 160px;
+        }
+    }
+
+
+
+}

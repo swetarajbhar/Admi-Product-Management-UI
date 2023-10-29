@@ -1,0 +1,49 @@
+.borderStyle {
+    /* border-color: hsl(0, 0%, 80%);
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+    font-size: 16px; */
+    border-style: none;
+    
+    margin-top: 0.4em;
+    /* width: 50%; */
+}
+
+/* .borderStyle ::-webkit-input-placeholder {
+    color: hsl(0, 0%, 50%);
+}
+
+.borderStyle:-ms-input-placeholder {
+    color: hsl(0, 0%, 50%);
+}
+
+.borderStyle::placeholder {
+    color: hsl(0, 0%, 50%);
+} */
+
+/* .borderStyle, */
+.react-time-picker__wrapper {
+    display: flex;
+    flex-grow: 1;
+    flex-shrink: 0;
+    border-color: hsl(0, 0%, 80%) !important;
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 1px !important;
+    font-size: 16px;
+    width: 80%;
+    padding: 0.3em 0.5em;
+
+}
+
+/* .borderStyle, */
+/* .react-time-picker__wrapper, */
+.react-time-picker__inputGroup {
+    min-width: calc((4px * 3) + 0.54em * 6 + 0.217em * 2);
+    flex-grow: 1;
+    /* padding: 0 2px; */
+    box-sizing: content-box;
+    font-size: 16px !important;
+    /* padding: 10px; */
+}
