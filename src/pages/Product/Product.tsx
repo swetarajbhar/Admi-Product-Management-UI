@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useHistory } from "react-router";
 import { ReactComponent as UploadIcon } from "../../assets/SVG/uploadIcon.svg";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import Button from "../../components/Button/Button";
@@ -82,7 +81,6 @@ const Product = (): JSX.Element => {
 
   const onStartImageChange = async (event: any) => {
     const file = event.target.files[0];
-    console.log("FILE :", file);
     if (
       file &&
       (file.type === "image/jpeg" ||
@@ -108,7 +106,6 @@ const Product = (): JSX.Element => {
 
   const onMidImageChange = async (event: any) => {
     const file = event.target.files[0];
-    console.log("FILE :", file);
     if (
       file &&
       (file.type === "image/jpeg" ||
@@ -199,9 +196,6 @@ const Product = (): JSX.Element => {
       const formData = new FormData();
       formData.append("productName", name);
       formData.append("price", price);
-      console.log("START IMAGE :", startImage);
-      console.log("MID IMAGE :", midImage);
-      console.log("END IMAGE :", endImage);
       if (startImage.file) {
         formData.append("images", startImage.file);
       }
@@ -215,47 +209,47 @@ const Product = (): JSX.Element => {
       const productParam: TStandardObject = {};
       if (action === CONSTANTS.ACTION.EDIT) {
         productParam.sku = sku.toString();
-        // const response = await updateProductData(formData, productParam);
-        // if (response.status === 200) {
-        //   setModal({ show: false });
-        //   setSku("");
-        //   setName("");
-        //   setPrice("");
-        //   setStartImage({
-        //     fileName: "",
-        //     file: "",
-        //     newFileUploaded: false,
-        //     uploadedFromComputer: true,
-        //     contentType: "",
-        //   });
-        //   setMidImage({
-        //     fileName: "",
-        //     file: "",
-        //     newFileUploaded: false,
-        //     uploadedFromComputer: true,
-        //     contentType: "",
-        //   });
-        //   setEndImage({
-        //     fileName: "",
-        //     file: "",
-        //     newFileUploaded: false,
-        //     uploadedFromComputer: true,
-        //     contentType: "",
-        //   });
-        //   setLoading(false);
-        // } else if (response.status === 409) {
-        //   setError({
-        //     ...error,
-        //     duplicateProduct: true,
-        //   });
-        //   setLoading(false);
-        // } else {
-        //   setPopupMessage({
-        //     show: true,
-        //     msg: "Some Error Occured Please Try Again Later!",
-        //   });
-        //   setLoading(false);
-        // }
+        const response = await updateProductData(formData, productParam);
+        if (response.status === 200) {
+          setModal({ show: false });
+          setSku("");
+          setName("");
+          setPrice("");
+          setStartImage({
+            fileName: "",
+            file: "",
+            newFileUploaded: false,
+            uploadedFromComputer: true,
+            contentType: "",
+          });
+          setMidImage({
+            fileName: "",
+            file: "",
+            newFileUploaded: false,
+            uploadedFromComputer: true,
+            contentType: "",
+          });
+          setEndImage({
+            fileName: "",
+            file: "",
+            newFileUploaded: false,
+            uploadedFromComputer: true,
+            contentType: "",
+          });
+          setLoading(false);
+        } else if (response.status === 409) {
+          setError({
+            ...error,
+            duplicateProduct: true,
+          });
+          setLoading(false);
+        } else {
+          setPopupMessage({
+            show: true,
+            msg: "Some Error Occured Please Try Again Later!",
+          });
+          setLoading(false);
+        }
       }
       if (action === CONSTANTS.ACTION.ADD) {
         const response = await saveProductData(formData);
@@ -562,7 +556,6 @@ const Product = (): JSX.Element => {
       if (actionType === CONSTANTS.ACTION.EDIT) {
         setAction(CONSTANTS.ACTION.EDIT);
         const response = await findProductById(sku);
-        console.log("RESPONSE :", response);
         if (response.status === 200) {
           setSku(sku);
           setModal({ show: true });
