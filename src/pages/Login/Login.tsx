@@ -7,11 +7,7 @@ import Entry from "../../components/Entry/Entry";
 import LOCALSTORAGE from "../../constants/LOCALSTORAGE";
 import isEmpty from "../../utils/isEmpty";
 import { isEmail } from "../../utils/regexCheck";
-import {
-  PRODUCT_MASTER,
-  USER_MASTER,
-  VIDEO_LIBRARY_LISTING,
-} from "../../utils/routes";
+import { PRODUCT_MASTER } from "../../utils/routes";
 import styles from "./Login.module.scss";
 import MessagePopup from "../../components/MessagePopup/MessagePopup";
 
@@ -75,7 +71,6 @@ const Login = (): JSX.Element => {
         password: form.password,
       });
       if (response.status === 200) {
-        // history.push(VIDEO_LIBRARY_LISTING);
         history.push(PRODUCT_MASTER);
       } else if (response.status === 400) {
         setPopupMessage({ show: true, msg: "Invalid Email Id/ Password !" });

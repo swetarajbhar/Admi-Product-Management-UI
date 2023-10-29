@@ -1,35 +1,13 @@
 import cx from "classnames";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useHistory } from "react-router";
-import { ReactComponent as ZeeNewsLogo } from "../../assets/SVG/logo.svg";
 import InventoryLogo from "../../assets/PNG/inventoryLogo.png";
-import { ReactComponent as NoNotificationIcon } from "../../assets/SVG/notificationIcon.svg";
-import { ReactComponent as Notifications } from "../../assets/SVG/notifications.svg";
 import { ReactComponent as UserIcon } from "../../assets/SVG/userIcon.svg";
-import { ReactComponent as VideoIcon } from "../../assets/SVG/videocam.svg";
-import { DEFAULT, LOGIN, NOTIFICATION } from "../../utils/routes";
+import { LOGIN } from "../../utils/routes";
 import Menu from "../Menu/Menu";
 import styles from "./Header.module.scss";
-import Modal from "../Modal/Modal";
-import Entry from "../Entry/Entry";
-import Button from "../Button/Button";
-import { getNotificationList } from "../../api/notification";
-import isEmpty from "../../utils/isEmpty";
-import { ReactComponent as IconClose } from "../../assets/SVG/iconClose.svg";
-import { isPassword } from "../../utils/regexCheck";
-import { updatePassword } from "../../api/changePassword";
-import { loginUser, logOut } from "../../api/auth";
+import { logOut } from "../../api/auth";
 import MessagePopup from "../MessagePopup/MessagePopup";
-import LOCALSTORAGE from "../../constants/LOCALSTORAGE";
-
-interface NotificationData {
-  [key: string]: string | number | undefined | null;
-}
-interface ChangePassword {
-  oldpassword: string;
-  newpassword: string;
-  confirmpassword: string;
-}
 
 const Header = (): JSX.Element => {
   const history = useHistory();
@@ -47,11 +25,7 @@ const Header = (): JSX.Element => {
   const performLogout = async () => {
     const response = await logOut();
     if (response.status === 200) {
-      // history.push(VIDEO_LIBRARY_LISTING);
-      // localStorage.clear();
-      // Redirect to the login page
       history.push(LOGIN);
-      // Refresh the page
       window.location.reload();
     } else {
       setPopupMessage({
@@ -63,11 +37,7 @@ const Header = (): JSX.Element => {
 
   const onMenuClick = (value: string) => {
     if (value === "logout") {
-      // window.localStorage.clear();
-      // localStorage.setItem(LOCALSTORAGE.IS_AUTHENTICATED, 'false');
       performLogout();
-      // history.push(LOGIN);
-      // window.location.reload();
     }
   };
 
