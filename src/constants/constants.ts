@@ -20,11 +20,7 @@ const CONSTANTS = {
     { id: "7", label: "Failed", value: "Failed" },
     { id: "8", label: "Published", value: "Published" },
   ],
-  PUSH_STATUS: [
-    { id: "1", label: "All", value: "" },
-    { id: "2", label: "Published", value: "Published" },
-    { id: "3", label: "Unpublished", value: "Unpublished" },
-  ],
+
   ACTION: {
     VIEW: "view",
     EDIT: "edit",
@@ -35,12 +31,6 @@ const CONSTANTS = {
   FILTER_BY: {
     SEARCH_TEXT: "search_text",
     DATE_RANGE: "date_range",
-  },
-
-  UPLOAD_METHOD: {
-    FROM_COMPUTER: "fromComputer",
-    FROM_S3_UPLOAD: "fromS3Upload",
-    CHOOSE_FROM_LAST_RECORD: "chooseFromLastRecord",
   },
 
   DATE_FORMAT: "dd/MM/yyyy",

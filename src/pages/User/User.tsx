@@ -4,7 +4,6 @@ import { CSVLink } from "react-csv";
 import DatePicker from "react-datepicker";
 import { useHistory } from "react-router";
 import Select from "react-select";
-import { propertyList } from "../../api/property";
 import {
   deleteUserRecord,
   findUserById,
@@ -72,26 +71,6 @@ const User = (): JSX.Element => {
   const [loading, setLoading] = useState(false);
   const history = useHistory();
   const limit = 10;
-
-  useEffect(() => {
-    getPropertyData();
-  }, []);
-
-  const getPropertyData = async () => {
-    const response = await propertyList();
-    if (response.status === 200) {
-      const responseData = response?.data ?? [];
-      const data = responseData.map((item: any) => ({
-        id: item._id,
-        value: item.property_name,
-        label: item.property_name,
-        liveUrl: item.live_url,
-      }));
-      setPropertyData(data);
-    } else {
-      setPropertyData([]);
-    }
-  };
 
   const addUser = () => {
     setModal({ show: true });
