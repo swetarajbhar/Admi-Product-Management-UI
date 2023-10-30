@@ -11,6 +11,7 @@ import TStandardObject from "../../types/StandardObject";
 import isEmpty from "../../utils/isEmpty";
 import styles from "./Product.module.scss";
 import MessagePopup from "../../components/MessagePopup/MessagePopup";
+import { convertBufferToFile } from "../../utils/convertBufferToFile";
 import {
   productList,
   deleteProductRecord,
@@ -196,16 +197,44 @@ const Product = (): JSX.Element => {
       const formData = new FormData();
       formData.append("productName", name);
       formData.append("price", price);
+
       if (startImage.file) {
-        formData.append("images", startImage.file);
-      }
-      if (midImage.file) {
-        formData.append("images", midImage.file);
-      }
-      if (endImage.file) {
-        formData.append("images", endImage.file);
+        if (startImage.file.data && startImage.file.data instanceof Array) {
+          const file = convertBufferToFile(
+            startImage.file.data,
+            startImage.fileName,
+            startImage.contentType
+          );
+          formData.append("images", file);
+        } else {
+          formData.append("images", startImage.file);
+        }
       }
 
+      if (midImage.file) {
+        if (midImage.file.data && midImage.file.data instanceof Array) {
+          const file = convertBufferToFile(
+            midImage.file.data,
+            midImage.fileName,
+            midImage.contentType
+          );
+          formData.append("images", file);
+        } else {
+          formData.append("images", midImage.file);
+        }
+      }
+      if (endImage.file) {
+        if (endImage.file.data && endImage.file.data instanceof Array) {
+          const file = convertBufferToFile(
+            endImage.file.data,
+            endImage.fileName,
+            endImage.contentType
+          );
+          formData.append("images", file);
+        } else {
+          formData.append("images", endImage.file);
+        }
+      }
       const productParam: TStandardObject = {};
       if (action === CONSTANTS.ACTION.EDIT) {
         productParam.sku = sku.toString();

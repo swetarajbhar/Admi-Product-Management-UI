@@ -1,26 +1,31 @@
-import moment from 'moment';
-import { useEffect, useState } from 'react';
-import { CSVLink } from 'react-csv';
-import DatePicker from 'react-datepicker';
-import { useHistory } from 'react-router';
-import Select from 'react-select';
-import { propertyList } from '../../api/property';
-import { deleteUserRecord, findUserById, saveUserData, userList } from '../../api/user';
-import { ReactComponent as CalendarIcon } from '../../assets/SVG/calendar.svg';
-import { ReactComponent as ExportIcon } from '../../assets/SVG/export.svg';
-import Breadcrumb from '../../components/Breadcrumb/Breadcrumb';
-import Button from '../../components/Button/Button';
-import CustomCheckbox from '../../components/customCheckbox/CustomCheckbox';
-import Entry from '../../components/Entry/Entry';
-import Modal from '../../components/Modal/Modal';
-import Table from '../../components/Table/Table';
-import CONSTANTS from '../../constants/constants';
-import DATE_FORMAT from '../../constants/DATE_FORMAT';
-import TStandardObject from '../../types/StandardObject';
-import isEmpty from '../../utils/isEmpty';
-import { isPassword } from '../../utils/regexCheck';
-import styles from './User.module.scss';
-import MessagePopup from '../../components/MessagePopup/MessagePopup';
+import moment from "moment";
+import { useEffect, useState } from "react";
+import { CSVLink } from "react-csv";
+import DatePicker from "react-datepicker";
+import { useHistory } from "react-router";
+import Select from "react-select";
+import { propertyList } from "../../api/property";
+import {
+  deleteUserRecord,
+  findUserById,
+  saveUserData,
+  userList,
+} from "../../api/user";
+import { ReactComponent as CalendarIcon } from "../../assets/SVG/calendar.svg";
+import { ReactComponent as ExportIcon } from "../../assets/SVG/export.svg";
+import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
+import Button from "../../components/Button/Button";
+import CustomCheckbox from "../../components/customCheckbox/CustomCheckbox";
+import Entry from "../../components/Entry/Entry";
+import Modal from "../../components/Modal/Modal";
+import Table from "../../components/Table/Table";
+import CONSTANTS from "../../constants/constants";
+import DATE_FORMAT from "../../constants/DATE_FORMAT";
+import TStandardObject from "../../types/StandardObject";
+import isEmpty from "../../utils/isEmpty";
+import { isPassword } from "../../utils/regexCheck";
+import styles from "./User.module.scss";
+import MessagePopup from "../../components/MessagePopup/MessagePopup";
 interface TableData {
   [key: string]: string | number | undefined | null;
 }
@@ -30,19 +35,21 @@ initialStartDate.setDate(1);
 
 const User = (): JSX.Element => {
   const [data, setData] = useState<Array<TStandardObject>>([]);
-  const [filterBy, setFilterBy] = useState<string>(CONSTANTS.FILTER_BY.DATE_RANGE);
-  const [search, setSearch] = useState<string>('');
+  const [filterBy, setFilterBy] = useState<string>(
+    CONSTANTS.FILTER_BY.DATE_RANGE
+  );
+  const [search, setSearch] = useState<string>("");
   const [startDate, setStartDate] = useState<Date>(initialStartDate);
   const [endDate, setEndDate] = useState<Date>(new Date());
   const [offset, setOffset] = useState(0);
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [property, setProperty] = useState<any>(null);
   const [propertyData, setPropertyData] = useState<Array<TableData>>([]);
-  const [password, setPassword] = useState('');
-  const [action, setAction] = useState('');
-  const [userID, setUserID] = useState('');
+  const [password, setPassword] = useState("");
+  const [action, setAction] = useState("");
+  const [userID, setUserID] = useState("");
   const [error, setError] = useState({
     name: false,
     email: false,
@@ -53,13 +60,13 @@ const User = (): JSX.Element => {
   });
   const [popupMessage, setPopupMessage] = useState({
     show: false,
-    msg: '',
+    msg: "",
   });
   const [modal, setModal] = useState({ show: false });
   const [csvData, setCsvData] = useState<Array<TableData>>([]);
   const [changePassword, setChangePassword] = useState(false);
   const [totalCount, setTotalCount] = useState(0);
-  const [currentID, setCurrentID] = useState<string | number>('');
+  const [currentID, setCurrentID] = useState<string | number>("");
   const [renderDeleteBox, setRenderDeleteBox] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -74,7 +81,12 @@ const User = (): JSX.Element => {
     const response = await propertyList();
     if (response.status === 200) {
       const responseData = response?.data ?? [];
-      const data = responseData.map((item: any) => ({ id: item._id, value: item.property_name, label: item.property_name, liveUrl: item.live_url }));
+      const data = responseData.map((item: any) => ({
+        id: item._id,
+        value: item.property_name,
+        label: item.property_name,
+        liveUrl: item.live_url,
+      }));
       setPropertyData(data);
     } else {
       setPropertyData([]);
@@ -91,7 +103,7 @@ const User = (): JSX.Element => {
     setName(e.target.value);
     setError({
       ...error,
-      name: isEmpty(e.target.value)
+      name: isEmpty(e.target.value),
     });
   };
 
@@ -100,7 +112,7 @@ const User = (): JSX.Element => {
     setError({
       ...error,
       email: isEmpty(e.target.value),
-      duplicateEmail: false
+      duplicateEmail: false,
     });
   };
 
@@ -108,7 +120,7 @@ const User = (): JSX.Element => {
     setPhoneNumber(e.target.value);
     setError({
       ...error,
-      phoneNumber: isEmpty(e.target.value)
+      phoneNumber: isEmpty(e.target.value),
     });
   };
 
@@ -116,7 +128,7 @@ const User = (): JSX.Element => {
     setProperty(e);
     setError({
       ...error,
-      property: false
+      property: false,
     });
   };
 
@@ -124,17 +136,17 @@ const User = (): JSX.Element => {
     setPassword(e.target.value);
     setError({
       ...error,
-      password: isEmpty(e.target.value)
+      password: isEmpty(e.target.value),
     });
   };
 
   const isValidEmail = () => {
-    const emailPattern = new RegExp('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$');
+    const emailPattern = new RegExp("[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$");
     return emailPattern.test(String(email));
   };
 
   const isValidPhoneNo = () => {
-    return (phoneNumber !== '' && phoneNumber.length === 10);
+    return phoneNumber !== "" && phoneNumber.length === 10;
   };
 
   const isValidPassword = () => {
@@ -143,48 +155,60 @@ const User = (): JSX.Element => {
   };
 
   const isValid = () => {
-    if (isValidEmail() && isValidPhoneNo() && !isEmpty(name) && isValidPassword() && !isEmpty(property) && property.length > 0) return true;
+    if (
+      isValidEmail() &&
+      isValidPhoneNo() &&
+      !isEmpty(name) &&
+      isValidPassword() &&
+      !isEmpty(property) &&
+      property.length > 0
+    )
+      return true;
     return false;
   };
 
   const onSave = async () => {
     if (isValid()) {
-      const props = property.map((x: any) => ({ property_id: x.id, property_name: x.value, live_url: x.liveUrl }));
+      const props = property.map((x: any) => ({
+        property_id: x.id,
+        property_name: x.value,
+        live_url: x.liveUrl,
+      }));
       const userParam: TStandardObject = {
         full_name: name,
         email: email,
         phone_number: phoneNumber,
-        role_id: '6138f2263e3ba105b4313c78',
-        role_name: 'Admin',
-        property: props
-
+        role_id: "6138f2263e3ba105b4313c78",
+        role_name: "Admin",
+        property: props,
       };
-      if (action === CONSTANTS.ACTION.EDIT) userParam.user_id = userID.toString();
+      if (action === CONSTANTS.ACTION.EDIT)
+        userParam.user_id = userID.toString();
       if (changePassword) userParam.password = password;
 
       const response = await saveUserData(userParam);
       if (response.status === 200) {
         setModal({ show: false });
-        setUserID('');
-        setName('');
-        setEmail('');
-        setPhoneNumber('');
+        setUserID("");
+        setName("");
+        setEmail("");
+        setPhoneNumber("");
         setProperty(null);
-        setPassword('');
+        setPassword("");
         setLoading(false);
-      }
-      else if (response.status === 409) {
+      } else if (response.status === 409) {
         setError({
           ...error,
-          duplicateEmail: true
+          duplicateEmail: true,
+        });
+        setLoading(false);
+      } else {
+        setPopupMessage({
+          show: true,
+          msg: "Some Error Occured Please Try Again Later!",
         });
         setLoading(false);
       }
-      else {
-        setPopupMessage({ show: true, msg: 'Some Error Occured Please Try Again Later!' });
-        setLoading(false);
-      }
-
     } else {
       setError({
         name: isEmpty(name),
@@ -200,12 +224,12 @@ const User = (): JSX.Element => {
 
   const onCancel = () => {
     setModal({ show: false });
-    setUserID('');
-    setName('');
-    setEmail('');
-    setPhoneNumber('');
+    setUserID("");
+    setName("");
+    setEmail("");
+    setPhoneNumber("");
     setProperty(null);
-    setPassword('');
+    setPassword("");
     setLoading(false);
     setError({
       name: false,
@@ -214,7 +238,6 @@ const User = (): JSX.Element => {
       property: false,
       password: false,
       duplicateEmail: false,
-
     });
   };
 
@@ -229,8 +252,9 @@ const User = (): JSX.Element => {
           value={name}
           onChange={onName}
         />
-        {error.name && <small className={styles.error}>Please enter name</small>}
-
+        {error.name && (
+          <small className={styles.error}>Please enter name</small>
+        )}
       </div>
     );
   };
@@ -246,8 +270,12 @@ const User = (): JSX.Element => {
           value={email}
           onChange={onEmail}
         />
-        {error.email && <small className={styles.error}>Please enter valid email</small>}
-        {error.duplicateEmail && <small className={styles.error}>This Email Already Exists</small>}
+        {error.email && (
+          <small className={styles.error}>Please enter valid email</small>
+        )}
+        {error.duplicateEmail && (
+          <small className={styles.error}>This Email Already Exists</small>
+        )}
       </div>
     );
   };
@@ -262,9 +290,13 @@ const User = (): JSX.Element => {
           placeholder="Phone Number"
           value={phoneNumber}
           onChange={onPhoneNumber}
-          onInput={(e) => e.target.value = e.target.value.slice(0, 10)}
+          onInput={(e) => (e.target.value = e.target.value.slice(0, 10))}
         />
-        {error.phoneNumber && <small className={styles.error}>Please enter valid phone number</small>}
+        {error.phoneNumber && (
+          <small className={styles.error}>
+            Please enter valid phone number
+          </small>
+        )}
       </div>
     );
   };
@@ -280,7 +312,9 @@ const User = (): JSX.Element => {
           placeholder="Select Property"
           options={propertyData}
         />
-        {error.property && <small className={styles.error}>Please select property</small>}
+        {error.property && (
+          <small className={styles.error}>Please select property</small>
+        )}
       </div>
     );
   };
@@ -297,47 +331,49 @@ const User = (): JSX.Element => {
           onChange={onPassword}
           disabled={!changePassword}
         />
-        {error.password && <small className={styles.error}>Please enter password</small>}
-        {(!isPassword(password) && changePassword)
-          ? <span className={styles.error}>
-            Password should contain at least one upper case, lower case, special character, number and at least 8 characters
+        {error.password && (
+          <small className={styles.error}>Please enter password</small>
+        )}
+        {!isPassword(password) && changePassword ? (
+          <span className={styles.error}>
+            Password should contain at least one upper case, lower case, special
+            character, number and at least 8 characters
           </span>
-          : ''}
+        ) : (
+          ""
+        )}
       </div>
     );
   };
-
 
   const renderAddModal = () => {
     return (
       <Modal divId="fullscreenModal">
         <div className={styles.modalContainer}>
-          <div className={styles.headingStyle}>
-            Add New User
-          </div>
+          <div className={styles.headingStyle}>Add New User</div>
           <div className={styles.rows}>
             {renderNameField()}
             {renderEmailField()}
           </div>
-          <div className={styles.rows} >
+          <div className={styles.rows}>
             {renderPhoneNumberField()}
             {renderPropertyDropdown()}
           </div>
           <div className={styles.rows}>
             {renderPasswordField()}
-            <div style={{ marginTop: '0.5em' }}>
-              {action === CONSTANTS.ACTION.EDIT &&
+            <div style={{ marginTop: "0.5em" }}>
+              {action === CONSTANTS.ACTION.EDIT && (
                 <CustomCheckbox
-                  id='changePassword'
-                  value='Change Password'
+                  id="changePassword"
+                  value="Change Password"
                   checked={changePassword}
                   onChange={() => setChangePassword(!changePassword)}
                 />
-              }
+              )}
             </div>
           </div>
           <div className={styles.rows}>
-            <div id='buttonWrapper'>
+            <div id="buttonWrapper">
               <Button
                 id="save"
                 buttonType="primary"
@@ -345,40 +381,52 @@ const User = (): JSX.Element => {
                 disabled={loading}
                 onClick={onSave}
                 showLoader={loading}
-              > Save
+              >
+                {" "}
+                Save
               </Button>
               <Button
                 id="cancel"
                 buttonType="secondary"
                 styleClass={styles.modalButtonStyle}
                 onClick={onCancel}
-              > Cancel
+              >
+                {" "}
+                Cancel
               </Button>
             </div>
           </div>
         </div>
-
       </Modal>
     );
   };
 
-  const headers = ['Sr No', 'User ID', 'User Name', 'Email Address', 'Phone Number', 'Property Name', 'Created By', 'Status'];
+  const headers = [
+    "Sr No",
+    "User ID",
+    "User Name",
+    "Email Address",
+    "Phone Number",
+    "Property Name",
+    "Created By",
+    "Status",
+  ];
 
   const csvHeaders = [
-    { label: 'User ID', key: 'userId' },
-    { label: 'User Name', key: 'userName' },
-    { label: 'Email Address', key: 'email' },
-    { label: 'Phone Number', key: 'phoneNumber' },
-    { label: 'Property Name', key: 'propertyName' },
-    { label: 'Created By', key: 'ceatedBy' },
+    { label: "User ID", key: "userId" },
+    { label: "User Name", key: "userName" },
+    { label: "Email Address", key: "email" },
+    { label: "Phone Number", key: "phoneNumber" },
+    { label: "Property Name", key: "propertyName" },
+    { label: "Created By", key: "ceatedBy" },
     //{ label: 'Created At', key: 'ceatedAt' },
-    { label: 'Status', key: 'isActive' },
+    { label: "Status", key: "isActive" },
   ];
 
   async function onActionClick(actionType: string, index: any) {
     const userId = index;
 
-    if (userId && userId !== '-') {
+    if (userId && userId !== "-") {
       if (actionType === CONSTANTS.ACTION.EDIT) {
         setAction(CONSTANTS.ACTION.EDIT);
         setChangePassword(false);
@@ -386,14 +434,21 @@ const User = (): JSX.Element => {
         if (response.status === 200) {
           setUserID(userId);
           setModal({ show: true });
-          setName(response.data?.full_name || '');
-          setEmail(response.data?.email || '');
-          setPhoneNumber(response.data?.phone_number || '');
-          const prop = isEmpty(response.data.property) ? null : response.data.property.map((x: any) => ({ id: x.property_id, value: x.property_name, label: x.property_name, liveUrl: x.live_url }));
+          setName(response.data?.full_name || "");
+          setEmail(response.data?.email || "");
+          setPhoneNumber(response.data?.phone_number || "");
+          const prop = isEmpty(response.data.property)
+            ? null
+            : response.data.property.map((x: any) => ({
+                id: x.property_id,
+                value: x.property_name,
+                label: x.property_name,
+                liveUrl: x.live_url,
+              }));
           setProperty(prop);
-          setPassword(response.data?.password || '');
+          setPassword(response.data?.password || "");
         } else {
-          setUserID('');
+          setUserID("");
           setModal({ show: false });
         }
       }
@@ -425,8 +480,8 @@ const User = (): JSX.Element => {
   const dateSearch = (dateType: string, date: Date) => {
     setOffset(0);
     setCurrentPage(1);
-    dateType === 'startDate' && setStartDate(date);
-    dateType === 'endDate' && setEndDate(date);
+    dateType === "startDate" && setStartDate(date);
+    dateType === "endDate" && setEndDate(date);
     setFilterBy(CONSTANTS.FILTER_BY.DATE_RANGE);
   };
 
@@ -441,18 +496,22 @@ const User = (): JSX.Element => {
     };
     const response = await userList(isBulk ? { offset: 0 } : params);
     if (response.status === 200) {
-      const formatedData: Array<{ [key: string]: string | number | undefined | null }> = [];
+      const formatedData: Array<{
+        [key: string]: string | number | undefined | null;
+      }> = [];
       const data = response?.data ?? [];
       data.forEach((data: any, index: number) => {
         formatedData.push({
           srNo: index + 1 + offset,
-          userId: data.user_id || '-',
-          userName: data.full_name || '-',
-          email: data.email || '-',
-          phoneNumber: data.phone_number || '-',
-          propertyName: isEmpty(data.property) ? '-' : data?.property.map((x: any) => x?.property_name).join(', '),
-          ceatedBy: data.created_name || '-',
-          isActive: data.is_active ? 'Active' : 'Inactive',
+          userId: data.user_id || "-",
+          userName: data.full_name || "-",
+          email: data.email || "-",
+          phoneNumber: data.phone_number || "-",
+          propertyName: isEmpty(data.property)
+            ? "-"
+            : data?.property.map((x: any) => x?.property_name).join(", "),
+          ceatedBy: data.created_name || "-",
+          isActive: data.is_active ? "Active" : "Inactive",
         });
       });
       if (isBulk) {
@@ -481,7 +540,6 @@ const User = (): JSX.Element => {
     }
   }, [modal.show, search, startDate, endDate, offset, renderDeleteBox]);
 
-
   const onDelete = async () => {
     if (currentID) {
       const response = await deleteUserRecord(currentID);
@@ -501,15 +559,19 @@ const User = (): JSX.Element => {
         <div className={styles.content}>
           <Breadcrumb />
           <Entry
-            id='search'
+            id="search"
             styleClass={styles.searchBar}
             value={search}
-            onChange={(e) => { onSearch(e.target.value); }}
+            onChange={(e) => {
+              onSearch(e.target.value);
+            }}
           />
           <div className={styles.datePickerWrapper}>
             <DatePicker
               selected={startDate}
-              onChange={(date: Date | null) => date && dateSearch('startDate', date)}
+              onChange={(date: Date | null) =>
+                date && dateSearch("startDate", date)
+              }
               selectsStart
               startDate={startDate}
               endDate={endDate}
@@ -518,10 +580,12 @@ const User = (): JSX.Element => {
               className={`${styles.startDate} ${styles.datepickerInput}`}
               maxDate={new Date()}
             />
-            <span style={{ paddingRight: '0.8em' }}>-</span>
+            <span style={{ paddingRight: "0.8em" }}>-</span>
             <DatePicker
               selected={endDate}
-              onChange={(date: Date | null) => date && dateSearch('endDate', date)}
+              onChange={(date: Date | null) =>
+                date && dateSearch("endDate", date)
+              }
               selectsEnd
               startDate={startDate}
               endDate={endDate}
@@ -533,17 +597,22 @@ const User = (): JSX.Element => {
             />
             <CalendarIcon className={styles.calendarIcon} />
           </div>
-          <CSVLink className={styles.exportButton} data={csvData} headers={csvHeaders} filename={CONSTANTS.USER_REPORT}>
+          <CSVLink
+            className={styles.exportButton}
+            data={csvData}
+            headers={csvHeaders}
+          >
             Export <ExportIcon />
           </CSVLink>
 
-          <Button buttonType="primary"
+          <Button
+            buttonType="primary"
             styleClass={styles.addUserButton}
-            id={'addnewuser'}
-            onClick={addUser}>
+            id={"addnewuser"}
+            onClick={addUser}
+          >
             Add New User
           </Button>
-
         </div>
         <Table
           headerData={headers}
@@ -560,27 +629,37 @@ const User = (): JSX.Element => {
           totalRecords={totalCount}
           showStatusMenu={false}
         />
-
       </div>
       {modal.show && renderAddModal()}
 
-      {renderDeleteBox && <Modal divId={'fullscreenModal'}>
-        <div className={styles.deleteContainer}>
-          <h4>
-            Are you sure you want to delete this user?
-          </h4>
-          <div className="split">
-            <Button id={styles.delete} buttonType={'primary'} onClick={onDelete}>
-              Yes
-            </Button>
-            <Button id={styles.cancelDelete} buttonType={'secondary'} onClick={onDeleteCancel}>
-              Cancel
-            </Button>
+      {renderDeleteBox && (
+        <Modal divId={"fullscreenModal"}>
+          <div className={styles.deleteContainer}>
+            <h4>Are you sure you want to delete this user?</h4>
+            <div className="split">
+              <Button
+                id={styles.delete}
+                buttonType={"primary"}
+                onClick={onDelete}
+              >
+                Yes
+              </Button>
+              <Button
+                id={styles.cancelDelete}
+                buttonType={"secondary"}
+                onClick={onDeleteCancel}
+              >
+                Cancel
+              </Button>
+            </div>
           </div>
-        </div>
-      </Modal>}
+        </Modal>
+      )}
       {popupMessage.show && (
-        <MessagePopup message={popupMessage.msg} onCloseClick={() => setPopupMessage({ show: false, msg: '' })} />
+        <MessagePopup
+          message={popupMessage.msg}
+          onCloseClick={() => setPopupMessage({ show: false, msg: "" })}
+        />
       )}
     </>
   );

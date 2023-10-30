@@ -289,37 +289,6 @@ const Table = ({
             )}
           </td>
         ))}
-        {showCloneBtn && (
-          <td key={index} className={styles.previewColumnData}>
-            {(row.status === "Transcoded" || row.status === "Published") && (
-              <Button
-                id={`clone_${index}`}
-                buttonType="primary"
-                styleClass={styles.previewBtnStyle}
-                disabled={isDataInactive(row.isActive)}
-                showTitle
-                onClick={() =>
-                  onActionClick &&
-                  onActionClick(CONSTANTS.ACTION.CLONE, row.contentId || "")
-                }
-              >
-                Clone
-              </Button>
-            )}
-          </td>
-        )}
-        {showVideoPreview && (
-          <td key={index} className={styles.previewColumnData}>
-            <Button
-              id={`previewButton_${index}`}
-              buttonType="secondary"
-              styleClass={styles.previewBtnStyle}
-              onClick={() => onPreviewClick && onPreviewClick(index)}
-            >
-              Preview
-            </Button>
-          </td>
-        )}
         {showActionColumn && (
           <td key={index} className={styles.actionColumnData}>
             {showViewAction && (
@@ -403,30 +372,6 @@ const Table = ({
           <thead>
             <tr>
               {showTableHeaders()}
-              {showVideoDownloadIcon && (
-                <th
-                  className={styles.downloadColumn}
-                  style={{ textAlign: "center" }}
-                >
-                  Download Video
-                </th>
-              )}
-              {showVideoPreview && (
-                <th
-                  className={styles.previewColumn}
-                  style={{ textAlign: "center" }}
-                >
-                  Video Preview
-                </th>
-              )}
-              {showCloneBtn && (
-                <th
-                  className={styles.cloneColumn}
-                  style={{ textAlign: "center" }}
-                >
-                  Clone
-                </th>
-              )}
               {showActionColumn && (
                 <th className={styles.actionColumn}>Action</th>
               )}
